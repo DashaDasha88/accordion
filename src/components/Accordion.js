@@ -34,6 +34,27 @@ const Wrap = styled.div `
     padding: 2rem;
     font-size: 2rem;
   }
+
+  span {
+    margin-right: 1.5rem;
+  }
+`;
+
+const Dropdown = styled.div `
+  background: #1c1c1c;
+  color: #00ffb9;
+  width: 100%;
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid #00ffb9;
+  border-top: 1px solid #00ffb9;
+
+  p {
+    font-size: 2rem;
+  }
 `;
 
 const Accordion = () => {
@@ -48,6 +69,8 @@ const Accordion = () => {
       return setClicked(null)
     }
 
+    setClicked(index);
+
   }
 
   return (
@@ -59,10 +82,17 @@ const Accordion = () => {
 
             return (
               <>
-              <Wrap>
+              <Wrap onClick={() => toggle(index)} key={index}>
                 <h1>{item.question}</h1>
+                <span>{clicked === index ? <FiMinus /> : <FiPlus /> }</span>
               </Wrap>
-                <p>{item.answer}</p>
+
+              {clicked === index ? (
+                <Dropdown>
+                  <p>{item.answer}</p>
+                </Dropdown>
+              ) : null}
+
               </>
             );
 
